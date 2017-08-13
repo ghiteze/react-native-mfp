@@ -1,0 +1,33 @@
+apply plugin: 'com.android.library'
+
+repositories {
+    jcenter()
+}
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.1"
+
+    packagingOptions {
+        pickFirst "META-INF/ASL2.0"
+        pickFirst "META-INF/LICENSE"
+        pickFirst "META-INF/NOTICE"
+    }
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
+        ndk {
+            abiFilters "armeabi-v7a", "x86"
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile "com.android.support:appcompat-v7:23.0.1"
+    compile "com.facebook.react:react-native:+"
+    compile "com.ibm.mobile.foundation:ibmmobilefirstplatformfoundation:8.0.+"
+}
