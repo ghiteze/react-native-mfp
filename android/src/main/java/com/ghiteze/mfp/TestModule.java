@@ -15,7 +15,7 @@ import com.facebook.react.bridge.ReadableMapKeySetIterator;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
 
-import com.ghitze.mfp.Utils;
+import com.ghiteze.mfp.Utils;
 
 public class TestModule extends ReactContextBaseJavaModule {
 
