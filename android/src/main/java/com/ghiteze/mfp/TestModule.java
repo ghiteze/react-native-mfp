@@ -10,10 +10,8 @@ import com.facebook.react.bridge.Promise;
 import org.json.JSONObject;
 import org.json.JSONException;
 import com.facebook.react.bridge.ReadableMap;
-import com.facebook.react.bridge.ReadableMapKeySetIterator;
 
 import com.facebook.react.bridge.WritableMap;
-import com.facebook.react.bridge.WritableNativeMap;
 
 import com.ghiteze.mfp.Utils;
 
@@ -34,41 +32,15 @@ public class TestModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void hihi(ReadableMap readableMap, final Promise promise) throws JSONException {
+  public void hihi(ReadableMap readableMap, final Promise promise) {
     try {
-      JSONObject object = new JSONObject();
-      ReadableMapKeySetIterator iterator = readableMap.keySetIterator();
-      WritableMap map = new WritableNativeMap();
+      JSONObject jsonObject = Utils.mapToJson(readableMap);
 
-      while (iterator.hasNextKey()) {
-        String key = iterator.nextKey();
-        switch (readableMap.getType(key)) {
-          case Null:
-            object.put(key, JSONObject.NULL);
-            break;
-          case Boolean:
-            object.put(key, readableMap.getBoolean(key));
-            break;
-          case Number:
-            object.put(key, readableMap.getDouble(key));
-            break;
-          case String:
-            object.put(key, readableMap.getString(key));
-            break;
-        }
-      }
-
-      Log.d("Object", "O" + object);
-
-      map.putString("name", "my name");
-      map.putInt("age", 10001);
-
-      Log.d("Object", "O1" + map);
+      WritableMap map = Utils.jsonToMap(jsonObject);
 
       promise.resolve(map);
 
     } catch (JSONException e) {
-      Log.d("Error", "E" + e);
       promise.reject(e);
     }
   }
